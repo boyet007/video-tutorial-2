@@ -23,6 +23,25 @@
     <textarea id="body" name="body" class="form-control"></textarea>
   </div>
 
+  @if (count($errors))
+
+  <div class="alert alert-danger">
+  		
+  		<ul>
+  			
+  			@foreach ($errors->all() as $error)
+
+  				<li >{{  $error }}</li>
+
+  			@endforeach
+
+  		</ul>
+
+  </div>
+
+  @endif
+
+
   <button type="submit" class="btn btn-primary">Publish</butt on>
 </form>
 </div>
