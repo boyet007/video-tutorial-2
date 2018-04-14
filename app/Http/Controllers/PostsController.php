@@ -12,13 +12,23 @@ class PostsController extends Controller
 {
     public function index(){
 
-    	return view('posts.index');
+    	//$posts = Post::all();
+
+    	$posts = Post::latest()->get(); //cari post paling terakhir diupdate
+
+    	return view('posts.index', compact('posts'));
 
     }
 
-    public function show(){
+    //public function show($id){
 
-    	return view('posts.show');
+    public function show(Post $post){
+    //$post samakan dari variable di route
+
+
+    	//$post = Post::find($id);
+
+    	return view('posts.show', compact('post'));
 
     }
 
