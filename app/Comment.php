@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
@@ -15,6 +15,8 @@ class Comment extends Model
 		return $this->belongsTo(Post::class);
 
     }
+
+    //protected $fillable = ['body'];
 
     
 }
