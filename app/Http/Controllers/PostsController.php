@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use App\Post;
 
+use Carbon\Carbon;
+
 class PostsController extends Controller
 {
 
@@ -24,7 +26,29 @@ class PostsController extends Controller
 
     	$posts = Post::latest()->get(); //cari post paling terakhir diupdate
 
-    	return view('posts.index', compact('posts'));
+        if ($month = request('month')){
+
+            $posts->whereMonth('created_at', Carbon::parse($month)->month); //March => 3,May => 5
+
+        }
+
+
+        if ($year = request('year')){
+
+            $posts->whereMonth('created_at', $year);
+
+        }
+
+        $archives = Post::selectRaw('year(created_at) as year, monthname(created_at) as month,count(*) published')
+            ->groupBy('year', 'month')
+            ->orderByRaw('min(created_at) desc')
+            ->get()
+            ->toArray();
+
+            //return $archives;
+
+
+    	return view('posts.index', compact('posts', 'archives'));
 
     }
 
