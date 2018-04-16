@@ -10,6 +10,14 @@ use App\Post;
 
 class PostsController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware('auth')->except(['index', 'show']);
+
+
+    }
+
     public function index(){
 
     	//$posts = Post::all();
@@ -58,13 +66,24 @@ class PostsController extends Controller
 
     	//$post->save();
 
-    	Post::create([
+        auth()->user()->publish(
 
-    		'title' => request('title'),
+            new Post(request(['title', 'body']))
+        );
 
-    		'body' => request('body')
+    	//Post::create([
 
-    	]);
+    	//	'title' => request('title'),
+
+    	//	'body' => request('body'),
+
+          //  'user_id' => auth()->id()
+
+
+    	//]);
+
+
+        //Post::create(request(['title', 'body', 'user_id']));
 
     	return redirect('/');
 

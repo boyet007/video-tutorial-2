@@ -19,6 +19,14 @@ class Post extends Model
 
 	}
 
+	public function user(){ // $comment->post->user
+
+		//return $this->hasMany('App\Comment');
+
+		return $this->belongsTo(User::class);
+
+	}
+
 	public function addComment($body){
 
 		//Comment::create([
