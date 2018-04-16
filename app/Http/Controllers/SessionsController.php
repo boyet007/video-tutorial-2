@@ -44,8 +44,6 @@ class SessionsController extends Controller
 
   public function destroy(){
 
-  	echo "test";
-
   	auth()->logout();
 
   	return view('/');
